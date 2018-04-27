@@ -86,6 +86,7 @@ def delete_domains(domains_to_delete, domains_dict):
 			elif status == Status.UNAUTHORIZED:
 				print("Authentication error. Reauthenticating...")
 				set_authentication()
+				domains_to_delete.appendleft(domain)
 				
 		except KeyError:
 			not_found_file.write(domain + "\n")
