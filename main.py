@@ -167,7 +167,7 @@ def set_credentials(txt_file):
 
 if __name__ == "__main__":
 	set_credentials("credentials.txt")
-    set_authentication()
+	set_authentication()
        
     domains = get_domains_from_api()
     domains_dict = domains_to_dict(domains)
