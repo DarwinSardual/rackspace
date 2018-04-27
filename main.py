@@ -162,6 +162,6 @@ if __name__ == "__main__":
     domains = get_domains_from_api()
     domains_dict = domains_to_dict(domains)
     
-    domains_from_file = load_domains_from_file("domains.txt")
+    domains_from_file = load_domains_from_file("domains_04_27_2018_filtered.txt")
     delete_domains(domains_from_file, domains_dict)
     
