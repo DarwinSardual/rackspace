@@ -88,7 +88,7 @@ def delete_domains(domains_to_delete, domains_dict):
 				set_authentication()
 				
 		except KeyError:
-			not_found_file.write(key + "\n")
+			not_found_file.write(domain + "\n")
 			print("Domain do not exist!")
 	
 	deleted_file.close()
