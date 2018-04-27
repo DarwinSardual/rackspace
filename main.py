@@ -46,14 +46,14 @@ def get_domains_from_api():
                 print("All domains have been fetched")
                 break
         elif status == 400 or status == 500:
-            print("Bad request or DNS fault")
+            print("Bad request or DNS fault.")
             break
         elif status == 401:
-            print("Request Unauthorized")
-            break
+            print("Request Unauthorized. Reauthenticating...")
+            set_authentication()
         elif status == 413:
+            time.sleep(50)
             print("Fetching domains are over the limit")
-            break
         else:
             print("An error has occured")
             break
