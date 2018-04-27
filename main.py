@@ -76,14 +76,15 @@ def delete_domains(domains_to_delete, domains_dict):
 			domain_id = int(domains_dict[domain])
 			status = delete_domains_from_server(domain_id)
 			
-			if status == Status.ACCEPTED:
+			if status["code"] == Status.ACCEPTED:
 				print("Domain " + domain + " is deleted from the server")
 				deleted_file.write(domain + "\n")
-			elif status == Status.OVER_THE_LIMIT:
+			elif status["code"] == Status.OVER_THE_LIMIT:
 				print("Delete limit reach. Pausing")
+				print(status["header"])
 				domains_to_delete.appendleft(domain)
-				time.sleep(5) # Pause for 5 seconds
-			elif status == Status.UNAUTHORIZED:
+				time.sleep(50) # Pause for 60 seconds
+			elif status["code"] == Status.UNAUTHORIZED:
 				print("Authentication error. Reauthenticating...")
 				set_authentication()
 				domains_to_delete.appendleft(domain)
@@ -99,12 +100,12 @@ def delete_domains(domains_to_delete, domains_dict):
 def delete_domains_from_server(domain_id):
 	global __auth
 	tenant_id = str(__auth["tenant_id"])
-	token = str(_auth["token"])
+	token = str(__auth["token"])
 	
 	link = "https://dns.api.rackspacecloud.com/v1.0/" + tenant_id + "/domains/" + str(domain_id)
 	req = requests.request("DELETE", link, headers={"Accept": "application/json", "X-Auth-Token": token, "Content-type": "application/json"})
 	
-	return req.status_code
+	return {"code": req.status_code, "header": req.headers}
 	
 def domains_to_dict(domains):
 	
