@@ -81,7 +81,6 @@ def delete_domains(domains_to_delete, domains_dict):
 				deleted_file.write(domain + "\n")
 			elif status["code"] == Status.OVER_THE_LIMIT:
 				print("Delete limit reach. Pausing")
-				print(status["header"])
 				domains_to_delete.appendleft(domain)
 				time.sleep(50) # Pause for 60 seconds
 			elif status["code"] == Status.UNAUTHORIZED:
