@@ -25,7 +25,7 @@ def get_domains_from_api():
 	
 	default_limit = 100
 	offset = 0
-	domains = deque()
+	domains = []
 	
 	# This function does not cater if we encounter an
 	# error and there's still remaining domain to fetch
@@ -118,7 +118,7 @@ def domains_to_dict(domains):
 def load_domains_from_file(txt_file):
 	domain_file = open(txt_file, "r")
 	domains = domain_file.readlines()
-	d = [s.strip("\n") for s in domains] # strip the new line characters
+	d = deque([s.strip("\n") for s in domains]) # strip the new line characters
 	return d
 	
 def set_authentication():
